@@ -2,12 +2,8 @@ package info.lsafarne.bson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Arrays;
-
 import info.lsafarne.Utils;
-import sun.security.util.Length;
 
 public class BSONDocument {
 
@@ -20,9 +16,10 @@ public class BSONDocument {
 		int docLength = 0;
 		int index = 0;
 
+		// The minimum size of a BSON document is 5 bytes
 		if (buffer.length >= 5) {
 
-			docLength = Utils.convertToInt(buffer, index);// red
+			docLength = Utils.convertToInt(buffer, index);
 			index += 4;
 
 			if (docLength == buffer.length && buffer[docLength - 1] == 0) {
@@ -71,8 +68,7 @@ public class BSONDocument {
 						element.value = Utils.convertToLong(buffer, index);
 						index += 8;
 					}else if (element.code == BSONElementType.NULL) {
-						int i=0;
-						i=4;
+						// nothing - no data - index must not change					
 					} else if (element.code == BSONElementType.BINARY) {
 						int binaryLen = Utils.convertToInt(buffer, index);
 						index = index + 4;
@@ -116,18 +112,6 @@ public class BSONDocument {
 			
 		}
 		
-/*		Iterator<Map.Entry<String, BSONElement>> iterator = elements.entrySet().iterator();
-		while(iterator.hasNext()) {
-			tmp = iterator.next().getValue().convertToBinary();
-			if(tmp != null)
-			{
-				totalLength += tmp.length;
-				elementArr.add(tmp);
-			}
-		}
-*/		
-		
-		
 		if(totalLength >0)
 		{
 			result = new byte[totalLength];
@@ -153,13 +137,7 @@ public class BSONDocument {
 		for(int i=0;i<elements.size();i++){
 			result+=elements.get(i).toString()+",";
 		}
-		
-		/*
-		Iterator<Map.Entry<String, BSONElement>> iterator = elements.entrySet().iterator();
-		while(iterator.hasNext()){
-			result+=iterator.next().getValue().toString()+",";
-		}
-		*/
+
 		if(!elements.isEmpty()){
 			result=result.substring(0, result.length()-1);
 		}
@@ -169,18 +147,14 @@ public class BSONDocument {
 	}
 
 	public int getSize(){
-		int result=5; //document ::= int32 e_list "\x00"
+		//   the format of a BSON document is:
+		//       document ::= int32 e_list "\x00"
+		//   where e_list is the list of elements
+		int result=5; 
 		for(int i=0;i<elements.size();i++){
 			result+=elements.get(i).getSize();
 		}
-/*		
-		Iterator<Map.Entry<String, BSONElement>> iterator = elements.entrySet().iterator();
-		BSONElement tmp;
-		while(iterator.hasNext()){
-			tmp=iterator.next().getValue();
-			result+=tmp.getSize();
-		}
-*/		
+		
 		return result;
 	}
 	public void insertElement(BSONElement element){
@@ -194,4 +168,5 @@ public class BSONDocument {
 	public ArrayList<BSONElement> getElements(){
 		return elements;
 	}
+
 }
