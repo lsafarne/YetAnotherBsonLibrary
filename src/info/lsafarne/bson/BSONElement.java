@@ -44,7 +44,7 @@ public class BSONElement {
 			break;
 		case BINARY:
 			byte[] tmpBinary = (byte[]) value;
-			result += tmpBinary.length;
+			result += tmpBinary.length + 4;
 			break;
 		case BOOLEAN:
 			result += 1;
@@ -142,7 +142,11 @@ public class BSONElement {
 			result=null;
 			break;
 		case BINARY:
-			result= (byte[]) value;
+			int binSize = ((byte[]) value).length;
+			byte[] binSizeArr = Utils.convertToBinary(binSize-1);
+			result = new byte[binSize + 4];
+			System.arraycopy(binSizeArr, 0, result, 0,  4);
+			System.arraycopy((byte[]) value, 0, result, 4, binSize);
 			break;
 		case BOOLEAN:
 			byte tmpBoolean=(byte) (((boolean) value)?1:0);
