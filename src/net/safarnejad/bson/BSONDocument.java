@@ -1,9 +1,11 @@
-package info.lsafarne.bson;
+package net.safarnejad.bson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import net.safarnejad.Utils;
+
 import java.util.Arrays;
-import info.lsafarne.Utils;
 
 public class BSONDocument {
 

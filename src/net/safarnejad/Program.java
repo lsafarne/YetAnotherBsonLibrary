@@ -1,8 +1,8 @@
-package info.lsafarne;
+package net.safarnejad;
 
-import info.lsafarne.bson.BSONDocument;
-import info.lsafarne.bson.BSONElement;
-import info.lsafarne.bson.BSONElementType;
+import net.safarnejad.bson.BSONDocument;
+import net.safarnejad.bson.BSONElement;
+import net.safarnejad.bson.BSONElementType;
 
 public class Program {
 	public static void main(String[] args) {

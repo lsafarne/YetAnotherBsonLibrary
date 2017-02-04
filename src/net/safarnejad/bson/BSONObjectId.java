@@ -1,4 +1,4 @@
-package info.lsafarne.bson;
+package net.safarnejad.bson;
 
 public class BSONObjectId {
 	byte [] objId;

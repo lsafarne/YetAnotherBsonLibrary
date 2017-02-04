@@ -1,6 +1,6 @@
-package info.lsafarne.bson;
+package net.safarnejad.bson;
 
-import info.lsafarne.messages.Opcode;
+import net.safarnejad.messages.Opcode;
 
 public enum BSONElementType {
 	

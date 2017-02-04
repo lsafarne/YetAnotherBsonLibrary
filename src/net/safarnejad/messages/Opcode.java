@@ -1,4 +1,4 @@
-package info.lsafarne.messages;
+package net.safarnejad.messages;
 
 public enum Opcode {
 	

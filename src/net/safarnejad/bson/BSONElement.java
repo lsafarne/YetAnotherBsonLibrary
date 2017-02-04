@@ -1,8 +1,8 @@
-package info.lsafarne.bson;
+package net.safarnejad.bson;
 
 import java.io.UnsupportedEncodingException;
 
-import info.lsafarne.Utils;
+import net.safarnejad.Utils;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class BSONElement {

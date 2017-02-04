@@ -1,4 +1,4 @@
-package info.lsafarne;
+package net.safarnejad;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
